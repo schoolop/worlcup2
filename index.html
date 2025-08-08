@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World Cup Staff</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body class="bg-gradient-to-b from-green-700 to-blue-900 min-h-screen text-white font-sans">
+
+  <!-- Title -->
+  <h1 class="text-4xl font-bold text-center pt-8 animate__animated animate__fadeInDown">
+    🌍 World Cup Staff
+  </h1>
+
+  <!-- About Section -->
+  <div class="max-w-3xl mx-auto mt-6 px-6 text-center animate__animated animate__fadeInUp">
+    <p class="bg-white/10 p-4 rounded-xl leading-relaxed">
+      The <strong>FIFA World Cup</strong> is the biggest international football (soccer) tournament in the world,
+      bringing together the best national teams from across the globe every four years.
+      It’s a celebration of skill, passion, and unity, where nations compete for the most prestigious trophy in sports.
+    </p>
+  </div>
+
+  <!-- Staff Form -->
+  <div class="max-w-lg mx-auto mt-8 bg-white/10 p-6 rounded-2xl shadow-lg animate__animated animate__fadeInUp">
+    <h2 class="text-2xl font-semibold mb-4 text-center">Add New Staff Member</h2>
+    <div class="flex flex-col gap-3">
+      <input id="name" type="text" placeholder="Staff Name"
+        class="px-4 py-2 rounded-lg text-black" />
+      <select id="role" class="px-4 py-2 rounded-lg text-black">
+        <option>Intern</option>
+        <option>Head Intern</option>
+        <option>Manager</option>
+        <option>Director</option>
+      </select>
+      <button onclick="addStaff()" class="bg-green-500 px-4 py-2 rounded-lg hover:bg-green-600">
+        Add Staff
+      </button>
+    </div>
+  </div>
+
+  <!-- Staff List -->
+  <div class="max-w-lg mx-auto mt-8 p-4">
+    <h2 class="text-2xl mb-4 font-semibold">Current Staff</h2>
+    <ul id="staffList" class="space-y-3"></ul>
+  </div>
+
+  <script>
+    const staffList = document.getElementById("staffList");
+
+    // Preloaded staff with flags & correct roles
+const initialStaff = [
+  { name: "idkkk08714p", role: "Director", flag: "🇺🇸" },
+  { name: "etherealerror123", role: "Intern", flag: "🇬🇧" },
+  { name: "hydro", role: "Intern", flag: "🇬🇧" },
+  { name: "octa", role: "Intern", flag: "🇺🇸" }
+];
+
+    function renderStaff() {
+      staffList.innerHTML = "";
+      initialStaff.forEach(member => {
+        const li = document.createElement("li");
+        li.className = "bg-white/20 p-4 rounded-lg flex justify-between items-center animate__animated animate__fadeInLeft";
+        li.innerHTML = `
+          <div>
+            <p class="font-bold">${member.flag} ${member.name}</p>
+            <p class="text-sm text-gray-300">${member.role}</p>
+          </div>
+          <button onclick="this.parentElement.remove()" class="bg-red-500 px-3 py-1 rounded-lg hover:bg-red-600">
+            Remove
+          </button>
+        `;
+        staffList.appendChild(li);
+      });
+    }
+
+    function addStaff() {
+      const name = document.getElementById("name").value.trim();
+      const role = document.getElementById("role").value;
+      if (!name) return;
+
+      const li = document.createElement("li");
+      li.className = "bg-white/20 p-4 rounded-lg flex justify-between items-center animate__animated animate__fadeInLeft";
+
+      li.innerHTML = `
+        <div>
+          <p class="font-bold">🌐 ${name}</p>
+          <p class="text-sm text-gray-300">${role}</p>
+        </div>
+        <button onclick="this.parentElement.remove()" class="bg-red-500 px-3 py-1 rounded-lg hover:bg-red-600">
+          Remove
+        </button>
+      `;
+
+      staffList.appendChild(li);
+      document.getElementById("name").value = "";
+    }
+
+    // Load preloaded staff
+    renderStaff();
+  </script>
+</body>
+</html>
